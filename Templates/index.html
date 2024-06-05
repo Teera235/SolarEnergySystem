@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payback Time Calculator</title>
+  <style>
+    /* Basic styling */
+    body {
+      font-family: sans-serif;
+      margin: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem; /* Spacing between form elements */
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 200px; /* Adjust width as needed */
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background-color: #4CAF50; /* Green */
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3e8e41; /* Darker green on hover */
+    }
+
+    /* Result styling (assuming result is numerical) */
+    h2 {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Payback Time Calculator</h1>
+  <form action="/calculate" method="POST">
+    <div>
+      <label for="TotalCost">Total Cost (in Bath):</label>
+      <input type="text" id="TotalCost" name="TotalCost" required>
+    </div>
+    <div>
+      <label for="SystemSize">System Size (in Kw):</label>
+      <input type="text" id="SystemSize" name="SystemSize" required>
+    </div>
+    <div>
+      <label for="FtCost">Current FT Cost (in Bath/kWh):</label>
+      <input type="text" id="FtCost" name="FtCost" required>
+    </div>
+    <button type="submit">Calculate</button>
+  </form>
+
+  {% if result %}
+    <h2>Payback Time: {{ result }} years</h2>
+  {% endif %}
+</body>
+</html>
