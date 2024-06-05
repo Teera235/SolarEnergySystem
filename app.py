@@ -14,17 +14,17 @@ def calculate():
         TotalCost = float(request.form['TotalCost'])
         SystemSize = float(request.form['SystemSize'])
         FtCost = float(request.form['FtCost'])
+        RealDay = int(request.form['RealDay'])
 
-        SunHours = 4
-        Efficiency = 0.9
-        RealDay = 360 
+        SunHours = 4  # คุณสามารถกำหนดค่าเริ่มต้นหรือใช้ค่าคงที่ตามที่คุณต้องการ
+        Efficiency = 0.9  # คุณสามารถกำหนดค่าเริ่มต้นหรือใช้ค่าคงที่ตามที่คุณต้องการ
 
         AllTime = SystemSize * SunHours * FtCost * Efficiency * RealDay
-        PayBackTime = TotalCost / AllTime 
+        PayBackTime = TotalCost / AllTime
 
-        result = f"Your PayBackTime: {round(PayBackTime, 1)} years"
+        result = f"เวลาคืนทุน: {round(PayBackTime, 1)} ปี"
     except ValueError:
-        result = "Invalid input. Please enter a valid number."
+        result = "ค่าไม่ถูกต้อง กรุณาป้อนตัวเลขที่ถูกต้อง"
 
     return render_template('index.html', result=result)
 

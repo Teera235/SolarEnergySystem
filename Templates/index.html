@@ -1,83 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payback Time Calculator</title>
-  <style>
-    /* Basic styling */
-    body {
-      font-family: sans-serif;
-      margin: 2rem;
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem; /* Spacing between form elements */
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-
-    input[type="text"] {
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 200px; /* Adjust width as needed */
-    }
-
-    button {
-      padding: 0.75rem 1.5rem;
-      background-color: #4CAF50; /* Green */
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #3e8e41; /* Darker green on hover */
-    }
-
-    /* Result styling (assuming result is numerical) */
-    h2 {
-      text-align: center;
-      font-size: 1.2rem;
-      margin-top: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarPayBack Calculator</title>
+    <style>
+        /* สไตล์ที่เหมาะสำหรับหน้าเว็บ */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid #007bff;
+            animation: fadeIn 1s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h1 {
+            color: #007bff;
+            margin-bottom: 30px;
+            animation: slideInDown 0.5s ease;
+        }
+        label {
+            display: block;
+            margin-bottom: 15px;
+            color: #555;
+            text-align: left;
+            animation: slideInLeft 0.5s ease;
+        }
+        input {
+            width: calc(100% - 30px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            animation: slideInRight 0.5s ease;
+        }
+        input:focus {
+            outline: none;
+            border: 2px solid #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 18px;
+            font-weight: bold;
+            animation: fadeIn 1s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .payback-time {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 40px);
+            max-width: 300px;
+            animation: slideInUp 0.5s ease;
+        }
+        .payback-time h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 24px;
+        }
+        /* การสร้าง animation */
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Payback Time Calculator</h1>
-  <form action="/calculate" method="POST">
-    <div>
-      <label for="TotalCost">Total Cost (in Bath):</label>
-      <input type="text" id="TotalCost" name="TotalCost" required>
-    </div>
-    <div>
-      <label for="SystemSize">System Size (in Kw):</label>
-      <input type="text" id="SystemSize" name="SystemSize" required>
-    </div>
-    <div>
-      <label for="FtCost">Current FT Cost (in Bath/kWh):</label>
-      <input type="text" id="FtCost" name="FtCost" required>
-    </div>
-    <button type="submit">Calculate</button>
-  </form>
-
-  {% if result %}
-    <h2>Payback Time: {{ result }} years</h2>
+    <div class="container">
+        <h1>SolarPayBack Calculator</h1>
+        <form action="/calculate" method="POST">
+            <label for="TotalCost">ค่าติดตั้งโซล่าเซลล์ทั้งหมด (Bath):</label>
+            <input type="text" id="TotalCost" name="TotalCost" required><br>
+            
+            <label for="SystemSize">ขนาดของระบบ (Kwh):</label>
+            <input type="text" id="SystemSize" name="SystemSize" required><br>
+            
+            <label for="FtCost">ค่า Feed-in Tariff (Bath/Ft):</label>
+            <input type="text" id="FtCost" name="FtCost" required><br>
+            
+            <label for="RealDay">จำนวนวันต่อปี (Day):</label>
+            <input type="text" id="RealDay" name="RealDay" required><br>
+            
+            <button type="submit">คำนวณ</button>
+        </form>
+        {% if result %}
+        <div class="payback-time">
+          <h2>{{ result }}</h2>
+      </div>
   {% endif %}
+</div>
 </body>
 </html>
